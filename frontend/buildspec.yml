@@ -1,15 +1,34 @@
 version: 0.2
 
+env:
+  variables:
+    S3_BUCKET: "1devaws-bucket1"
+    CF_DIST_ID: "E2F39PZW769J13"
+
 phases:
   install:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Install dependencies"
+      - echo "Installing frontend dependencies..."
+      - npm install
   build:
     commands:
-      - echo "Build frontend"
+      - echo "Building React frontend..."
+      - npm run build
   post_build:
     commands:
-      - echo "Deploy frontend"
+      - echo "Deploying build folder to S3 bucket: $S3_BUCKET"
+      - aws s3 sync build/ s3://$S3_BUCKET --delete
+      - echo "Creating CloudFront invalidation for distribution: $CF_DIST_ID"
+      - aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
+
+cache:
+  paths:
+    - 'node_modules/**/*'
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build
 
