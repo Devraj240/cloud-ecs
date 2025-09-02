@@ -10,12 +10,16 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      - echo "Moving to frontend directory..."
+      - cd frontend
       - echo "Installing frontend dependencies..."
       - npm install
+
   build:
     commands:
       - echo "Building React frontend..."
       - npm run build
+
   post_build:
     commands:
       - echo "Deploying build folder to S3 bucket: $S3_BUCKET"
@@ -25,10 +29,10 @@ phases:
 
 cache:
   paths:
-    - 'node_modules/**/*'
+    - 'frontend/node_modules/**/*'
 
 artifacts:
   files:
     - '**/*'
-  base-directory: build
+  base-directory: frontend/build
 
