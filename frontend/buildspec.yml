@@ -2,8 +2,8 @@ version: 0.2
 
 env:
   variables:
-    S3_BUCKET: 1devaws-bucket1
-    CF_DIST_ID: E2F39PZW769J13
+    S3_BUCKET: "1devaws-bucket1"
+    CF_DIST_ID: "E2F39PZW769J13"
 
 phases:
   install:
@@ -26,4 +26,3 @@ phases:
 cache:
   paths:
     - node_modules/**/*
-
