@@ -22,7 +22,7 @@ phases:
 
   post_build:
     commands:
-      - echo "Deploying build folder to S3 bucket:$S3_BUCKET"
+      - echo "Deploying build folder to S3 bucket: $S3_BUCKET"
       - aws s3 sync build/ s3://$S3_BUCKET --delete
       - echo "Creating CloudFront invalidation for distribution: $CF_DIST_ID"
       - aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
