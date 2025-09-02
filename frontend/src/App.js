@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Welcome to Two-Tier Project</h1>
+      <h1>Welcome Dev Raj</h1>
       <p>This is the frontend hosted on S3 + CloudFront.</p>
       <p><strong>Backend says:</strong> {message}</p>
     </div>
